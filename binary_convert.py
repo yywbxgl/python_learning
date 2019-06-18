@@ -86,6 +86,6 @@ def read_file_by_hex(file_name):
 
 
 if __name__ == "__main__":
-    read_file_by_fp16('output.dimg')
+    read_file_by_fp16('input/output.dimg')
     # read_file_by_hex('output.dimg')
     # read_file_by_bin('output.dimg')

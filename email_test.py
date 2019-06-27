@@ -20,7 +20,7 @@ message['Subject'] = Header(subject, 'utf-8')
  
  
 try:
-    smtpObj = smtplib.SMTP(mail_server,) 
+    smtpObj = smtplib.SMTP_SSL(mail_server, 465) 
     # smtpObj.set_debuglevel(1)
     smtpObj.login(mail_user,mail_pwd)  
     smtpObj.sendmail(sender, receivers, message.as_string())

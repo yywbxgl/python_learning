@@ -9,7 +9,7 @@ url = 'http://rsj.ningbo.gov.cn/col/col18843/index.html'
 # 发送邮箱服务器，账号，授权码，
 mail_server = "smtp.163.com"
 mail_user = "yywbxgl@163.com"
-mail_pwd = "xxxxxxx"
+mail_pwd = "s65656645"
 
 # 接收邮件
 sender = mail_user
@@ -72,7 +72,7 @@ def send_str(content):
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
-        smtpObj = smtplib.SMTP(mail_server,) 
+        smtpObj = smtplib.SMTP_SSL(mail_server, 465) 
         # smtpObj.set_debuglevel(1)
         smtpObj.login(mail_user,mail_pwd)  
         smtpObj.sendmail(sender, receivers, message.as_string())
@@ -92,7 +92,7 @@ def send_html(html):
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
-        smtpObj = smtplib.SMTP(mail_server,) 
+        smtpObj = smtplib.SMTP_SSL(mail_server, 465) 
         # smtpObj.set_debuglevel(1)
         smtpObj.login(mail_user,mail_pwd)  
         smtpObj.sendmail(sender, receivers, message.as_string())

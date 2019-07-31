@@ -8,8 +8,8 @@ url = 'http://rsj.ningbo.gov.cn/col/col18843/index.html'
 
 # 发送邮箱服务器，账号，授权码，
 mail_server = "smtp.163.com"
-mail_user = "yywbxgl@163.com"
-mail_pwd = "s65656645"
+mail_user = "xxxx@163.com"
+mail_pwd = "xxxx"
 
 # 接收邮件
 sender = mail_user

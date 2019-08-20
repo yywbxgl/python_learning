@@ -1,4 +1,5 @@
 import math
+import sys
 # from binascii import unhexlify
 # import numpy as np
 
@@ -86,6 +87,6 @@ def read_file_by_hex(file_name):
 
 
 if __name__ == "__main__":
-    read_file_by_fp16('input/output.dimg')
-    # read_file_by_hex('output.dimg')
-    # read_file_by_bin('output.dimg')
+    # read_file_by_fp16(sys.argv[1])
+    read_file_by_hex(sys.argv[1])
+    # read_file_by_bin(sys.argv[1])

@@ -36,12 +36,13 @@ def analyze_accuracy(results):
         picture_name = i
         picture_name_index = picture_name.split(".jpg")[0].split("_")[-1]
         picture_name_index = int(picture_name_index)
+        label = val_labels[picture_name_index-1].strip("\n")
         # print(picture_name)
         # print(picture_name_index)
         # print(results[i]["result"])
-        label = val_labels[picture_name_index-1].strip("\n")
         # print(label)
         results[i]["label"] = label
+        results[i]["pic_index"] = picture_name_index
 
         if label in results[i]["result"]:
             results[i]["top5"] = "True"
@@ -60,8 +61,11 @@ def analyze_accuracy(results):
     top5_num = 0
 
     # results = sorted(results.items(), key= lambda d:d[0])
-    for i in results:
-        temp = "pic[%s]  result[%s]  lable[%s]  top1[%s]  top5[%s]"%(i, results[i]["result"], results[i]["label"], results[i]["top1"], results[i]["top5"])
+    sorted_results = sorted(results.keys())
+    for i in sorted_results :
+    # for i in results:
+        temp = "img[%03s]  lable[%-3s]  result[%-19s]   top1[%s]  top5[%s]"%\
+            (i.split('.')[0],  results[i]["label"], results[i]["result"], results[i]["top1"], results[i]["top5"])
         print(temp)
         if results[i]["top1"] == "True":
             top1_num += 1

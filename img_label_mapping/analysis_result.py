@@ -1,7 +1,10 @@
+# 解析json output文件，对推理结果与图片标签对比，统计准确率
+
 import os, sys
 import json
 import re
 
+# 解析json output文件，放入map
 def read_all_output_file(input_dir):
     files= os.listdir(input_dir) #得到文件夹下的所有文件名称
     files.sort()
@@ -26,6 +29,7 @@ def read_all_output_file(input_dir):
     return results
 
 
+# 对result与图片标签对比，统计准确率
 def analyze_accuracy(results):
     f_val_label = open("my_label.txt", "r")
     val_labels = f_val_label.readlines()
@@ -54,13 +58,10 @@ def analyze_accuracy(results):
         else:
             results[i]["top1"] = "False"
 
-    # print(results)
-
     total_num = len(results)
     top1_num = 0
     top5_num = 0
 
-    # results = sorted(results.items(), key= lambda d:d[0])
     sorted_results = sorted(results.keys())
     for i in sorted_results :
     # for i in results:
@@ -81,7 +82,7 @@ def analyze_accuracy(results):
 
 if __name__ == "__main__":
     if len(sys.argv) !=2:
-        print("Usage: ", sys.argv[0], " input_json_path ")
+        print("Usage: ", sys.argv[0], " result_json_dir")
         sys.exit(-1)
     
     results = read_all_output_file(sys.argv[1])

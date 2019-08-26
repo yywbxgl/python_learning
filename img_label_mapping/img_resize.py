@@ -6,6 +6,14 @@ import os.path
 import sys, os
 import cv2
 
+# 取中心图片
+def crop_center(img,cropx,cropy):
+    y,x,c = img.shape
+    startx = x//2-(cropx//2)
+    starty = y//2-(cropy//2)    
+    return img[starty:starty+cropy,startx:startx+cropx]
+
+
 def convertjpg(inputdir, outdir, crop_size=224):
 
     if not os.path.isdir(outdir):
@@ -16,27 +24,19 @@ def convertjpg(inputdir, outdir, crop_size=224):
     for file in sorted_files:
         print(file)
         img = cv2.imread(inputdir + '/' + file)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # cv2默认为bgr顺序
+        #cv2读取后的图片数据默认为bgr顺序排列
+        #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
         print(img.shape)
         weight = img.shape[0]
         height = img.shape[1]
         if weight < height:
-            img = cv2.resize(img, (224, int(height/weight * 224)))
-            weight_resize = 224
-            height_resize = int(height/weight * 224)
-            img = cv2.resize(img, (height_resize,weight_resize))
-            height_crop_size = int((height_resize-224)/2)
-            if height_crop_size != 0:
-                img = img[:, height_crop_size:-height_crop_size, :]
+            img = cv2.resize(img, (int(height/weight * 224), 224))
         else:
-            weight_resize = int(weight/height * 224)
-            height_resize = 224
-            img = cv2.resize(img, (height_resize,weight_resize))
-            weight_crop_size = int((weight_resize-224)/2)
-            if weight_crop_size != 0:
-                img = img[weight_crop_size:-weight_crop_size, :, :]
+            img = cv2.resize(img, (224, int(weight/height * 224)))
 
+        print(img.shape)
+        img = crop_center(img,224,224)
         (w,h,c) = img.shape
         if w!= 224 or h!=224 or c!=3:
             print("error shape ", img.shape)

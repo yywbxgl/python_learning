@@ -6,6 +6,9 @@ import os.path
 import sys, os
 import cv2
 
+#crop_size = 224
+crop_size = 224
+
 # 取中心图片
 def crop_center(img,cropx,cropy):
     y,x,c = img.shape
@@ -14,7 +17,7 @@ def crop_center(img,cropx,cropy):
     return img[starty:starty+cropy,startx:startx+cropx]
 
 
-def convertjpg(inputdir, outdir, crop_size=224):
+def convertjpg(inputdir, outdir):
 
     if not os.path.isdir(outdir):
         os.makedirs(outdir)
@@ -31,14 +34,14 @@ def convertjpg(inputdir, outdir, crop_size=224):
         weight = img.shape[0]
         height = img.shape[1]
         if weight < height:
-            img = cv2.resize(img, (int(height/weight * 224), 224))
+            img = cv2.resize(img, (int(height/weight * crop_size), crop_size))
         else:
-            img = cv2.resize(img, (224, int(weight/height * 224)))
+            img = cv2.resize(img, (crop_size, int(weight/height * crop_size)))
 
         print(img.shape)
-        img = crop_center(img,224,224)
+        img = crop_center(img,crop_size,crop_size)
         (w,h,c) = img.shape
-        if w!= 224 or h!=224 or c!=3:
+        if w!= crop_size or h!=crop_size or c!=3:
             print("error shape ", img.shape)
             sys.exit(-1)
 
@@ -47,7 +50,7 @@ def convertjpg(inputdir, outdir, crop_size=224):
         cv2.imwrite(save_file, img)
 
 
-def convertjpg2(inputdir, outdir, width=224, height=224):
+def convertjpg2(inputdir, outdir, width=crop_size, height=crop_size):
 
     if not os.path.isdir(outdir):
         os.makedirs(outdir)

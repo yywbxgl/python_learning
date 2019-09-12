@@ -21,6 +21,6 @@ onnx.checker.check_model(inferred_model)
 print('The model inferred!')
 
 file_name = sys.argv[1].split(".onnx", 1)[0]
-file_name = file_name + '_shape2.onnx'
+file_name = file_name + '_shaped.onnx'
 print("save model", file_name)
 onnx.save(inferred_model, file_name)

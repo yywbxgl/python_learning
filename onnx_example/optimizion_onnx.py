@@ -15,7 +15,7 @@ print()
 
 # Pick one pass as example
 #passes = ['fuse_add_bias_into_conv']
-passes = ['fuse_pad_into_conv']
+passes = ['eliminate_deadend']
 
 # Apply the optimization on the original model
 optimized_model = optimizer.optimize(original_model, passes)

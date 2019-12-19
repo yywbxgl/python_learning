@@ -47,7 +47,7 @@ def check_url(temp_list):
     if (new_list != temp_list):
         # 只显示最新的5条
         str_temp = ""
-        for i in new_list[:2]:
+        for i in new_list[:1]:
             print(i)
             str_temp += i + "\r\n\r\n"
         str_temp += "\r\n\r\n详细见网站" + url
@@ -65,7 +65,7 @@ def send_str(content):
     message['to'] =  receivers   # 接收者
 
     # 标题
-    subject = '孙启梁，宁波职业技术学院招人更新'
+    subject = '孙启梁，大学老师更新'
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
@@ -87,7 +87,7 @@ if __name__ == "__main__":
         print("---- now time :", localtime)
 
         try:
-            check_url(temp_list)
+            temp_list = check_url(temp_list)
         except:
             print("get html error.")
 
